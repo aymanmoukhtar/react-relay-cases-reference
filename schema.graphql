@@ -1,0 +1,89 @@
+"""The cost directives is used to express the complexity of a field."""
+directive @cost(
+  """Defines the complexity of the field."""
+  complexity: Int! = 1
+
+  """Defines field arguments that act as complexity multipliers."""
+  multipliers: [MultiplierPath!]
+) on FIELD_DEFINITION
+
+input AddBookInput {
+  id: String
+  title: String
+}
+
+type Book implements Node {
+  id: ID!
+  title: String
+}
+
+"""A connection to a list of items."""
+type BookConnection {
+  """A list of edges."""
+  edges: [BookEdge!]
+
+  """A flattened list of the nodes."""
+  nodes: [Book]
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+"""An edge in a connection."""
+type BookEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Book
+}
+
+"""
+The multiplier path scalar represents a valid GraphQL multiplier path string.
+"""
+scalar MultiplierPath
+
+type Mutation {
+  addBook(book: AddBookInput): Book
+  deleteById(id: String): [Book]
+}
+
+"""
+The node interface is implemented by entities that have a gloabl unique identifier.
+"""
+interface Node {
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """
+  Indicates whether more edges exist following the set defined by the clients arguments.
+  """
+  hasNextPage: Boolean!
+
+  """
+  Indicates whether more edges exist prior the set defined by the clients arguments.
+  """
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+scalar PaginationAmount
+
+type Query {
+  allBooks(after: String, before: String, first: PaginationAmount, last: PaginationAmount): BookConnection
+  bookById(id: String): Book
+  node(id: ID!): Node
+}
+
+type Subscription {
+  onBookAdded: Book
+}
+
