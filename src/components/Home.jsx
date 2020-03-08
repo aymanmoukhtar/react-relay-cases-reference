@@ -5,7 +5,7 @@ import environment, { connectionUpdater } from '../relay.environment';
 import Books from './Books';
 
 const bookAddedSubscription = graphql`
-  subscription BooksBookAddedSubscription {
+  subscription HomeBookAddedSubscription {
       onBookAdded {
           id
           title

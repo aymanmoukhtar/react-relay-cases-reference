@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fccc8b89d6a4b4da754ac316f1b995c5
+ * @relayHash 77c48f9af4a41e3a0a5774e40674916b
  */
 
 /* eslint-disable */
@@ -9,22 +9,22 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type BooksBookAddedSubscriptionVariables = {||};
-export type BooksBookAddedSubscriptionResponse = {|
+export type HomeBookAddedSubscriptionVariables = {||};
+export type HomeBookAddedSubscriptionResponse = {|
   +onBookAdded: ?{|
     +id: string,
     +title: ?string,
   |}
 |};
-export type BooksBookAddedSubscription = {|
-  variables: BooksBookAddedSubscriptionVariables,
-  response: BooksBookAddedSubscriptionResponse,
+export type HomeBookAddedSubscription = {|
+  variables: HomeBookAddedSubscriptionVariables,
+  response: HomeBookAddedSubscriptionResponse,
 |};
 */
 
 
 /*
-subscription BooksBookAddedSubscription {
+subscription HomeBookAddedSubscription {
   onBookAdded {
     id
     title
@@ -64,7 +64,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "BooksBookAddedSubscription",
+    "name": "HomeBookAddedSubscription",
     "type": "Subscription",
     "metadata": null,
     "argumentDefinitions": [],
@@ -72,20 +72,20 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "BooksBookAddedSubscription",
+    "name": "HomeBookAddedSubscription",
     "argumentDefinitions": [],
     "selections": (v0/*: any*/)
   },
   "params": {
     "operationKind": "subscription",
-    "name": "BooksBookAddedSubscription",
+    "name": "HomeBookAddedSubscription",
     "id": null,
-    "text": "subscription BooksBookAddedSubscription {\n  onBookAdded {\n    id\n    title\n  }\n}\n",
+    "text": "subscription HomeBookAddedSubscription {\n  onBookAdded {\n    id\n    title\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0f50098ae0a389eb9adca01c69d865b7';
+(node/*: any*/).hash = '3721c3cc4b529d8afbaae5b25bf7dc9b';
 
 module.exports = node;
