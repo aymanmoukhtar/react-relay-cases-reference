@@ -1,7 +1,20 @@
 import axios from 'axios';
-import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import { ConnectionHandler, Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { Observable } from 'rxjs';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+
+const connectionUpdater = (rootField, connection) => (store) => {
+    const newItem = store.getRootField(rootField);
+    const connectionRecord = store.getRoot().getLinkedRecord(connection);
+    const newItemEdge = ConnectionHandler.createEdge(
+        store,
+        connectionRecord,
+        newItem,
+        `${newItem.getType()}Edge`
+    );
+    
+    ConnectionHandler.insertEdgeAfter(connectionRecord, newItemEdge);
+};
 
 const fetchQuery = (
     operation,
@@ -25,4 +38,5 @@ const environment = new Environment({
     store: new Store(new RecordSource())
 });
 
-export default environment
+export default environment;
+export { connectionUpdater };

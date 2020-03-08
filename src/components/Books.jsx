@@ -1,39 +1,11 @@
 import React, { useEffect } from 'react';
-import { createFragmentContainer, requestSubscription } from "react-relay";
-import { ConnectionHandler } from 'relay-runtime';
+import { createFragmentContainer } from "react-relay";
 
-import environment from '../relay.environment';
 import Book from "./Book";
-
-const subscription = graphql`
-  subscription BooksBookAddedSubscription {
-      onBookAdded {
-          id
-          title
-        }
-    }
-`;
 
 const Books = ({ books }) => {
     useEffect(() => {
-        requestSubscription(
-            environment,
-            {
-                subscription,
-                variables: {},
-                updater: store => {
-                    const newBook = store.getRootField('onBookAdded');
-                    const allBooksRecord = store.getRoot().getLinkedRecord('allBooks');
-                    const newBookEdge = ConnectionHandler.createEdge(
-                        store,
-                        allBooksRecord,
-                        newBook,
-                        'BookEdge'
-                    );
-                    ConnectionHandler.insertEdgeAfter(allBooksRecord, newBookEdge);
-                }
-            }
-        );
+        
     }, []);
 
     return (
